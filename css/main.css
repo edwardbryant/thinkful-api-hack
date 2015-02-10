@@ -16,7 +16,7 @@ body {
 /* GENERAL */
 
 .outer-wrapper {
-    border: 2px solid #b60912;
+    border: 4px solid #b60912;
 }
 .inverse {
     color: #fffadd;
@@ -31,6 +31,18 @@ body {
     padding: 0;
     text-align: center;
 }
+.content-wide {
+    width: 88%;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+}
+img {
+    margin: 0;
+    padding: 0;
+
+}
+
 button {
     background-color: #66cc99;
     padding: 12px;
@@ -61,7 +73,7 @@ header .lead-in {
     font-weight: bold;
 }
 header h1 {
-    text-shadow: 4px 4px 4px #ddd8bb;
+    text-shadow: 4px 4px 4px #aaa;
     letter-spacing: 0.6rem;
     text-transform: uppercase;
     font-weight: 800;
@@ -84,22 +96,35 @@ header h2 {
 main {
     margin-top: 2rem;
     margin-bottom: 2rem;
-    border-left: 2px solid red;
-    border-right: 2px solid red;
 }
 section {
-    margin-top: 4px;
-    margin-bottom: 4px;
+    border: 1px solid blue;
+    margin: 0;
+    padding: 0;
 }
+
+/*   */
+
+
+#chick-img {
+}
+#ticket {
+    vertical-align: top;
+    cursor: pointer;
+}
+#guy-img {
+}
+
 
 /* FOOTER */
 
 footer {
-    padding: 20px 40px 40px 40px;
-    color: #77a;
+    padding: 1.6rem 4rem 1.6rem 4rem;
+    font-size: 1rem;
+    letter-spacing: 0.1rem;
 }
 footer div {
-    margin-bottom: 1rem;
+    margin-bottom: 0.2rem;
 }
 footer a:link, footer a:active, footer a:visited, footer a:hover {
     color: #36c;
