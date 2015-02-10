@@ -1,7 +1,7 @@
 html {
     color: #333;
     font-size: 62.5%;
-    font-family: 'Open Sans', sans-serif; 
+    font-family: 'Open Sans', sans-serif;
     -webkit-font-smoothing: antialiased; 
 }
 body {
@@ -98,7 +98,6 @@ main {
     margin-bottom: 2rem;
 }
 section {
-    border: 1px solid blue;
     margin: 0;
     padding: 0;
 }
@@ -114,7 +113,13 @@ section {
 }
 #guy-img {
 }
-
+.date {
+    font: 400 2.4rem/2.4rem "Open Sans", sans-serif;
+    color: #b60912;
+    letter-spacing: 1.4rem;
+    font-weight: bold;
+    margin: 1rem;
+}
 
 /* FOOTER */
 
