@@ -37,6 +37,18 @@ body {
     padding: 0;
     text-align: center;
 }
+.left {
+    float: left;
+}
+.right {
+    float: right;
+}
+hr {
+    border: 0;
+    background-color: #b60912;
+    height: 6px;
+    clear: both;
+}
 img {
     margin: 0;
     padding: 0;
@@ -64,11 +76,14 @@ header .top-line {
     font-weight: bold;
     letter-spacing: 0.6rem;
 }
+header .top-line .contraction {
+    font-size: 1.2rem;
+}
 header .lead-in {
     color: #b60912;
     font-size: 1.8rem;
     letter-spacing: 1.4rem;
-    margin: 1rem;
+    margin: 1rem 0 0.6rem 0;
     padding: 0.1rem;
     font-weight: bold;
 }
@@ -87,8 +102,9 @@ header h1 > span {
     vertical-align: middle;
 }
 header h2 {
-    color: #666;
-    font-weight: 200;
+    font: 200 2rem/2.4rem "Open Sans", sans-serif;
+    color: #333;
+    letter-spacing: 0.06rem;
 }
 
 /* MAIN  */
@@ -113,13 +129,42 @@ section {
 }
 #guy-img {
 }
-.date {
-    font: 400 2.4rem/2.4rem "Open Sans", sans-serif;
-    color: #b60912;
-    letter-spacing: 1.4rem;
-    font-weight: bold;
+.sm-box {
     margin: 1rem;
+    width: 112px;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 12px 8px 12px 8px;
 }
+.sm-box span {
+    font: 800 1.6rem/1.6rem "Open Sans", sans-serif;
+    display: block;
+}
+.sm-box #live {
+    font: 800 2.8rem/2.8rem "Open Sans", sans-serif;
+    letter-spacing: 1rem;
+    padding-left: 1rem;
+    margin-bottom: 1rem;    
+}
+.sm-box #day-name {
+    font: 800 1.6rem/1.6rem "Open Sans", sans-serif;
+    letter-spacing: 0.8rem;
+    padding-left: 0.8rem;
+}
+.sm-box #month {
+    font: 800 3rem/3rem "Open Sans", sans-serif;
+    letter-spacing: 1.4rem;
+    padding-left: 1.4rem;
+}
+.sm-box #day-num {
+    font: 800 6rem/6rem "Open Sans", sans-serif;
+    padding-left: 1.4rem;
+    text-align: center;
+    letter-spacing: 1.4rem;
+    
+
+}
+
 
 /* FOOTER */
 
