@@ -4,7 +4,19 @@
 
 $(document).ready(function() {
 
-    // pulsate('#ticket');
+    // populate date
+
+    var d = new Date();
+    var days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+    var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    var day = days[d.getDay()];
+    var month = months[d.getMonth()];
+    var date = d.getDate();
+    $("#day").html("&bull;" + day + "&bull;"); 
+    $("#month").text(month); 
+    $("#date").text(date); 
+
+    pulsate('#ticket');
 
     cleanText("aaa");
 

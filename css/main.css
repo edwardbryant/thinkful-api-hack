@@ -146,7 +146,7 @@ section {
     padding-left: 1rem;
     margin-bottom: 1rem;    
 }
-.sm-box #day-name {
+.sm-box #day {
     font: 800 1.6rem/1.6rem "Open Sans", sans-serif;
     letter-spacing: 0.8rem;
     padding-left: 0.8rem;
@@ -156,15 +156,19 @@ section {
     letter-spacing: 1.4rem;
     padding-left: 1.4rem;
 }
-.sm-box #day-num {
+.sm-box #date {
     font: 800 6rem/6rem "Open Sans", sans-serif;
     padding-left: 1.4rem;
     text-align: center;
     letter-spacing: 1.4rem;
-    
+}
+.coming-soon h3 {
+    font: 800 2rem/2rem "Open Sans", sans-serif;
+    letter-spacing: 1.6rem;
+    padding-left: 1.6rem;
+    margin: 1rem;
 
 }
-
 
 /* FOOTER */
 
@@ -175,6 +179,7 @@ footer {
 }
 footer div {
     margin-bottom: 0.2rem;
+    text-align: center;
 }
 footer a:link, footer a:active, footer a:visited, footer a:hover {
     color: #36c;
