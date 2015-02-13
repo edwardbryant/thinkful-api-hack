@@ -1,11 +1,12 @@
 
 
-
-
 $(document).ready(function() {
+    updateDate();
+    pulsate('#ticket');
+    cleanText("aaa");
+});
 
-    // populate date
-
+function updateDate() {
     var d = new Date();
     var days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
     var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
@@ -14,14 +15,8 @@ $(document).ready(function() {
     var date = d.getDate();
     $("#day").html("&bull;" + day + "&bull;"); 
     $("#month").text(month); 
-    $("#date").text(date); 
-
-    pulsate('#ticket');
-
-    cleanText("aaa");
-
-});
-
+    $("#date").text(date);
+}
 
 function cleanText(text) {
 
