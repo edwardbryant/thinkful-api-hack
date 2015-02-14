@@ -30,6 +30,7 @@ function cleanText(text) {
     // var text = " A movie, which is a film, about a fun-loving man's adventure in time. You will love it!";
 
     // replace hyphen with whitespace, before punc stripped 
+    text = text.replace(/ - /g,' ');
     text = text.replace(/-/g,' ');
 
     // remove remaining punc and leave no space
@@ -38,7 +39,7 @@ function cleanText(text) {
     // trim any whitespace from start and end of str  
     text = text.trim();
 
-    console.log("[" + text + "]");
+    return text;
 
 }
 
@@ -82,29 +83,27 @@ var getMovieDetails = function(id){
         // console.log(result['release_date']);
         // console.log(result['tagline']);
         console.log(result);
-
-        var title = result['title'];
-        var year = result['release_date'].substr(0,4);
-        var poster = "http://image.tmdb.org/t/p/w150/" + result['poster_path'];
-
         var displayDetails = {
-            title: title,
-            year: year,
-            poster: poster
-        }
+            title: result['title'],
+            year: result['release_date'].substr(0,4),
+            poster: "http://image.tmdb.org/t/p/w150/" + result['poster_path']
+        };        
+        var textDetails = {
+            title: result['title'],
+            tagline: cleanText(result['tagline']),
+            overview_raw: result['overview'],
+            overview: cleanText(result['overview'])
+        };
+        testR(textDetails);
 
-        testR(displayDetails);
 
     });
 };
 
 var testR = function(details){
-
-    console.log(details['poster']);
-
-}
-
-
+    console.log(details['overview_raw']);
+    console.log(details['overview']);
+};
 
 function chicScore(text) {
     var chicWords = ["beautiful","beauty","breakup","boyfriend","bride","bridesmaid","bridesmaids","couple","couples","cry","dance","dancing","date","diamond","diamonds","diary","diaries","divorce","divorced","dream","fashion","friend","friends","girlfriend","girlfriends","heart","irresistible","kiss","kissing","love","marriage","paris","piano","pink","relationship","romance","romantic","sad","saddest","sister","sisterhood","spa","social","sweet","unfaithful","vows","wedding","weddings"];
