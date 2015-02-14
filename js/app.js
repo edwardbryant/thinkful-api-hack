@@ -46,7 +46,9 @@ var getMovieId = function(q) {
     console.log("API called to find movie id");
     var request = {
         api_key: "fed1050696146f0081c5285f5fd827c5",
-        query: q
+        query: q,
+        language: "en",
+        include_adult: false
     };
     var result = $.ajax({
         url: "http://api.themoviedb.org/3/search/movie",
@@ -57,15 +59,16 @@ var getMovieId = function(q) {
     .done(function(result){
         console.log(result);
         var id = result['results'][0]['id'];
+        console.log("API movie search matched (" + q + ") to ID " + id)
         getMovieDetails(id);
     });
-}
+};
 
 var getMovieDetails = function(id){
-    console.log(id);
-    console.log("API called to get movie details");
+    console.log("API movie detail call on ID " + id);
     var request = {
-        api_key: "fed1050696146f0081c5285f5fd827c5"
+        api_key: "fed1050696146f0081c5285f5fd827c5",
+        language: "en"
     };
     var result = $.ajax({
         url: "http://api.themoviedb.org/3/movie/" + id,
@@ -74,54 +77,32 @@ var getMovieDetails = function(id){
         type: "GET",
     })
     .done(function(result){
-        console.log(result['overview']);
-        console.log(result['poster_path']);
-        console.log(result['release_date']);
-        console.log(result['tagline']);
-        console.log(result['title']);
+        // console.log(result['overview']);
+        // console.log(result['poster_path']);
+        // console.log(result['release_date']);
+        // console.log(result['tagline']);
+        console.log(result);
+
+        var title = result['title'];
+        var year = result['release_date'].substr(0,4);
+        var poster = "http://image.tmdb.org/t/p/w150/" + result['poster_path'];
+
+        var displayDetails = {
+            title: title,
+            year: year,
+            poster: poster
+        }
+
+        testR(displayDetails);
+
     });
+};
+
+var testR = function(details){
+
+    console.log(details['poster']);
+
 }
-
-
-function getMovieInfo(query) {
-    console.log("API function called.");
-    var q = "Enemy";
-    var searchRequest = {
-        api_key: apiKey,
-        query: q
-    };
-    var searchResult = $.ajax({
-        url: "http://api.themoviedb.org/3/search/movie",
-        data: searchRequest,
-        dataType: "jsonp",
-        type: "GET",
-    })
-    .done(function(searchResult){
-        console.log("found id ... getting movie info with it.");
-        var id = searchResult['results'][0]['id'];
-        var infoRequest = {
-            api_key: apiKey
-        };
-        var infoResult = $.ajax({
-            url: "http://api.themoviedb.org/3/movie/" + id,
-            data: infoRequest,
-            dataType: "jsonp",
-            type: "GET",
-        })
-        .done(function(infoResult){
-            cleanText(infoRequest['overview']);
-        })
-        .fail(function(jqXHR, error, errorThrown){
-            console.log(error);
-        });  
-    })
-    .fail(function(jqXHR, error, errorThrown){
-        console.log(error);
-    });
-} 
-
-
-
 
 
 
