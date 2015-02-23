@@ -12,6 +12,11 @@ body {
     background-size: cover;
     padding: 8px;
 }
+@media (max-width: 600px) {
+    body {
+        padding: 0;
+    }
+}
 
 /* GENERAL */
 
@@ -54,17 +59,11 @@ img {
     padding: 0;
 
 }
-
-button {
-    background-color: #66cc99;
-    padding: 12px;
-    border: 2px solid #000;
-    color: #fff;
-    font-size: 1.8rem;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    text-shadow: 1px 1px 1px #000;
-    cursor: pointer;
+#center-display-btn, #center-display-results {
+    width: 240px;
+}
+#center-display-results {
+    display: none;
 }
 
 /* HEADER */
@@ -95,16 +94,35 @@ header h1 {
     font-size: 4.6rem;
     margin: 0.2rem;
 }
-header h1 > span {
+header h1 > span:nth-child(2) {
     font: italic 400 2.6rem/2.6rem "Gentium Book Basic", serif;
     letter-spacing: 0.2rem;
     text-transform: lowercase;
     vertical-align: middle;
 }
-header h2 {
-    font: 200 2rem/2.4rem "Open Sans", sans-serif;
-    color: #333;
-    letter-spacing: 0.06rem;
+@media (max-width: 600px) {
+    header .top-line {
+        font-size: 1.4rem;
+        letter-spacing: 0.4rem;
+    }
+    .top-line > div > span:after {
+        content: "\A";
+        white-space: pre;
+    }
+    header .lead-in {
+        font-size: 1.4rem;
+    }
+    header h1 {
+        font-size: 3.2rem;
+        letter-spacing: 0.4rem;
+    }
+    header h1 > span:after {
+        content: "\A";
+        white-space: pre;
+    }
+    header h2 {
+        font-size: 1.4rem;
+    }
 }
 
 /* MAIN  */
@@ -118,17 +136,82 @@ section {
     padding: 0;
 }
 
-/*   */
+/* START SCREEN */
 
-
-#chick-img {
+#start h2 {
+    font: 200 2rem/2.4rem "Open Sans", sans-serif;
+    color: #333;
+    letter-spacing: 0.06rem;
 }
-#ticket {
+#start #ticket {
     vertical-align: top;
     cursor: pointer;
 }
-#guy-img {
+@media (max-width: 600px) {
+    #start h2 {
+        font-size: 1.4rem;
+    }
 }
+
+/* SEARCH SCREEN */
+
+#search {
+    display: none;
+}
+#search input {
+    display: inline;
+    margin: 0;
+    width: 40rem;
+    font-family: sans-serif;
+    font-size: 1.8rem;
+    box-shadow: none;
+    border-radius: none;
+    padding: 14px;
+    vertical-align: middle;
+
+    border: solid 2px #b60912;
+    box-shadow: inset 1px 1px 2px 0 #707070;
+
+}
+#search input:focus {
+    outline: none;
+}
+#search button {
+    background-color: #b60912;
+    padding: 12px;
+    border: 2px solid #000;
+    color: #fff;
+    font-size: 1.8rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 1px #000;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+/* RESULTS SCREEN */
+
+#results {
+    display: none;
+}
+#result-title {
+    font: 800 2rem/2rem "Open Sans", sans-serif;
+    color: #b60912;
+    letter-spacing: 0.4rem;
+}
+#result-year {
+    font: 800 1.6rem/2rem "Open Sans", sans-serif;
+    color: #333;
+}
+#result-poster img {
+    width: 150px;
+    height: 250px;
+    border: 2px solid #b60912;
+    box-shadow: 8px 8px 4px #707070;
+}
+
+/* OTHER */
+
 .sm-box {
     margin: 1rem;
     width: 112px;

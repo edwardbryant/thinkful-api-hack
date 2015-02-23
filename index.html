@@ -21,36 +21,62 @@
 
     <header>
         <div class="top-line inverse">
-            <div> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> The Internets <span class="contraction">and</span> the World Wide Web <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </div>
+            <div>
+                <span class="stars"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></span> 
+                <span> The Internets <span class="contraction">and</span> the World Wide Web </span>
+                <span class="stars"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></span>
+            </div>
         </div>
         <div class="content">
             <div class="lead-in">Present</div>
-            <h1>Chick Flic <span>or</span> Guy Movie</h1>
-            <h2>Let this amazing marvel of programming genius settle the argument once and for all!</h2>
-            <h2>Which is your favorite movie?</h2>
+            <h1>
+                <span>Chick Flic </span>
+                <span> or </span>
+                <span> Guy Movie</span>
+            </h1>
         </div>
     </header>
     <main id="main" role="main">
         <section>
             <div class="content-wide">
-                <img id="chick-img" src="img/chick.png"><img id="ticket" src="img/movie-ticket-sm.png"><img id="guy-img" src="img/guy.png">
+
+                <!-- start screen -->
+                <div id="start">
+                    <h2>Let this amazing marvel of programming genius settle the argument once and for all!</h2>
+                    <h2>Which is your favorite movie?</h2>
+                    <img id="ticket" src="img/movie-ticket-sm.png">
+                </div>
+
+                <div id="search">
+                    <input type="text" name="query" id="query" value="" placeholder="movie title"> <button id="btnSearch"> <i class="fa fa-search"></i> </button>
+                    <div>&mdash; or &mdash;</div>
+                    <button id="btnRandom"><i class="fa fa-random"></i> &nbsp; Select Random Movie </button>
+                </div>
+
+                <div id="results">
+                    <h2><span id="result-title">Movie Title</span></h2>
+                    <h2>(<span id="result-year"></span>)</h2>
+                    <div id="result-poster"><img src="http://placehold.it/150x250&text=poster"></div>        
+                </div>
+
+                <!-- <span id="left-display"><img id="chick-img" src="img/chick.png"></span>
+                <span id="center-display-btn"><img id="ticket" src="img/movie-ticket-sm.png"></span>
+                <span id="center-display-results">
+                        <img>
+
+                </span>
+                <span id="right-display"><img id="guy-img" src="img/guy.png"></span> -->
+
+                <br><br>
             </div>    
         </section>
         <section class="inverse">
             <div class="content-wide">
-                <div><br>[section]<br><br></div>
+                <div><br><span id="test">[section]</span><br><br></div>
             </div>    
         </section>
         <section>
             <div class="content-wide">
-                <div>
-                    <p>Additional Action-Packed Matchups</p>
-                    <ul>
-                        <li>Toilet Seat Up <span class="vs">vs.</span> Toilet Seat Down</li>
-                        <li>Stop and Ask Directions <span class="vs">vs.</span> Pretend to Not Be Lost</li>
-                        <li>The Purse <span class="vs">vs.</span> The Wallet</li>
-                    </ul>
-                </div>
                 <hr>
                 <div class="sm-box inverse left">
                     <span id="live">LIVE</span>

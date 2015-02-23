@@ -3,16 +3,31 @@ $(document).ready(function() {
     
     updateDate();
     pulse('#ticket');
-    
 
-    getMovieId("star trek");
+    $('#ticket').on('click', function() {        
+        $('#start').fadeOut(600, function(){
+            $('#search').fadeIn(600);
+        });
+    })
 
-    getScore();
+    $('#btnSearch').on('click', function() {
+        console.log("query option selected");     
+        var q = $('#query').val()
+        getMovieId(q);
+        $('#search').fadeOut(600, function(){
+            $('#results').fadeIn(600);
+        });
+    })
 
-
+    $('#btnRandom').on('click', function() {
+        console.log("random option selected");     
+        getMovieIdRandom();
+        $('#search').fadeOut(600, function(){
+            $('#results').fadeIn(600);
+        });
+    })
 
 });
-
 
 var updateDate = function() {
     var d = new Date();
@@ -28,13 +43,13 @@ var updateDate = function() {
 var pulse = function(element) {
     // lower opacity 
     var fadeItIn = function() {
-        $(element).fadeTo('600', 0.6, function () {
+        $(element).fadeTo('800', 0.8, function () {
             fadeItOut();
         });
     }
     // increase opacity 
     var fadeItOut = function() {
-        $(element).fadeTo('600', 1.0, function () {
+        $(element).fadeTo('800', 1.0, function () {
             fadeItIn();
         });
     }
@@ -52,8 +67,31 @@ var cleanText = function(text) {
     text = text.trim();
     return text;
 };
+var getMovieIdRandom = function() {
+    var page = Math.floor((Math.random() * 5) + 1);
+    console.log("random page: " + page);
+    var item = Math.floor((Math.random() * 20) + 1) - 1;
+    console.log("random item: " + item);
+    var request = {
+        api_key: "fed1050696146f0081c5285f5fd827c5",
+        page: page,
+        language: "en"
+    };
+    var result = $.ajax({
+        url: "http://api.themoviedb.org/3/movie/popular",
+        data: request,
+        dataType: "jsonp",
+        type: "GET"
+    })
+    .done(function(result){
+        console.log(result);
+        var id = result['results'][item]['id']; 
+        $('#test').text(test);
+        console.log("API movie search randomly selected ID " + id)
+        getMovieDetails(id);
+    });
+};
 var getMovieId = function(q) {
-    console.log("API called to find movie id");
     var request = {
         api_key: "fed1050696146f0081c5285f5fd827c5",
         query: q,
@@ -86,11 +124,6 @@ var getMovieDetails = function(id){
         type: "GET",
     })
     .done(function(result){
-        // console.log(result['overview']);
-        // console.log(result['poster_path']);
-        // console.log(result['release_date']);
-        // console.log(result['tagline']);
-        console.log(result);
         var displayDetails = {
             title: result['title'],
             year: result['release_date'].substr(0,4),
@@ -102,16 +135,30 @@ var getMovieDetails = function(id){
             overview_raw: result['overview'],
             overview: cleanText(result['overview'])
         };
-        testR(textDetails);
+        showDetails(displayDetails);
+
+        // scoreResults()
+        // testR(displayDetails);
 
 
     });
 };
+var showDetails = function(details){
+    console.log("showing movie details");
+    $('#result-poster > img').attr("src", details['poster']);
+    $('#result-title').text(details['title']);
+    $('#result-year').text(details['year']);
+};
+
+
+// testing stuff
+
+
 
 var getScore = function(text) {
 
 
-    var cKeywords = ["attractive","beautiful","beauty","breakup","boyfriend","bride","bridesmaid","bridesmaids","couple","couples","cry","dance","dancing","date","dating","diamond","diamonds","diary","diaries","divorce","divorced","dream","dreams","dress","dresses","emotion","emotional","emotions","estranged","ex","exboyfriend","exboyfriends","exgirlfriend","exgirlfriends","fashion","friend","friends","girlfriend","girlfriends","heart","hearts","intermingled","irresistible","kiss","kissing","love","loving","marriage","marry","paris","piano","pink","relationship","romance","romantic","sad","saddest","sensible","sister","sisterhood","spa","social","sweet","teen","teens","unfaithful","unlucky","vows","wedding","weddings"];
+    var cKeywords = ["attractive","beautiful","beauty","breakup","boyfriend","bride","bridesmaid","bridesmaids","clique","cliques","couple","couples","cry","dance","dancing","date","dating","diamond","diamonds","diary","diaries","divorce","divorced","dream","dreams","dress","dresses","emotion","emotional","emotions","estranged","ex","exboyfriend","exboyfriends","exgirlfriend","exgirlfriends","fashion","friend","friends","girl","girls","girlfriend","girlfriends","heart","hearts","intermingled","irresistible","kiss","kissing","love","loving","marriage","marry","paris","piano","pink","relationship","romance","romantic","sad","saddest","sensible","single","singles","sister","sisterhood","spa","social","sweet","teen","teens","unfaithful","unlucky","vows","wedding","weddings"];
 
     var gKeywords = ["alien","apocalypse","apocalyptic","armor","army","athelete","atheletes","battle","baseball","blood","bloody","boxer","boxing","coach","coaching","corrupt","corruption","cop","cowboy","crime","crimes","criminal","cyborg","cyborgs","dead","death","die","disaster","destroy","destroys","destructive","dragon","dragons","drug","drugs","fbi","fight","fighter","fighting","football","gang","gangster","gangsters","gladiator","gladiators","golf","gun","guns","hockey","hostage","hostages","hunt","hunting","invade","invasion","jail","kill","killer","killing","maniac","marines","martial","maverick","military","mob","mobster","murder","navy","outlaw","outlaws","pentagon","platoon","police","prison","prisoners","psychopath","revenge","robbery","samurai","security","serial","shield","slaughter","soldier","soldiers","superhero","sword","syndicate","terror","terrorist","terrorists","victim","vikings","vietnam","violence","violent","war","warrior","warriors","world","zombie","zombies"];
 
@@ -123,10 +170,18 @@ var getScore = function(text) {
 }
 
 
-// testing stuff
 
 var testR = function(details){
-    console.log(details['overview_raw']);
-    console.log(details['overview']);
+    var stuff = $("<h3>" + details['title'] + " (" + details['year'] + ")</h3><div><img src='" + details['poster'] + "'></div>")
+    $("#center-display-btn").fadeOut(200, function(){
+        $('#center-display-results').append(stuff);
+        $('#center-display-results').fadeIn(200);
+    });
+    console.log(details['title']);
+    console.log(details['year']);
+    // console.log(details['overview']);
+    if (details['overview'].length < 20) {
+        console.log("INSUFFICIENT DATA")
+    }
 };
 
