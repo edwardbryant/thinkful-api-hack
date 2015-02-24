@@ -1,15 +1,12 @@
 
 $(document).ready(function() {
-    
     updateDate();
     pulse('#ticket');
-
     $('#ticket').on('click', function() {        
         $('#start').fadeOut(600, function(){
             $('#search').fadeIn(600);
         });
     })
-
     $('#btnSearch').on('click', function() {
         var q = $('#query').val()
         getMovieId(q);
@@ -17,23 +14,19 @@ $(document).ready(function() {
             $('#results').fadeIn(600);
         });
     })
-
     $('#btnRandom').on('click', function() {
         getMovieIdRandom();
         $('#search').fadeOut(600, function(){
             $('#results').fadeIn(600);
         });
     })
-
     $('#btnReset').on('click', function() {
         $('#query').val("");
         $('#results').fadeOut(600, function(){
             $('#search').fadeIn(600);
         });
     })
-
 });
-
 var updateDate = function() {
     var d = new Date();
     var days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
@@ -138,14 +131,9 @@ var getMovieDetails = function(id){
             tagline: cleanText(result['tagline']),
             overview: cleanText(result['overview'])
         };
-
-
         // if insufficient info    
-
         showDetails(displayDetails);
         showScores(textDetails);
-
-
     });
 };
 var showDetails = function(details){
@@ -156,7 +144,7 @@ var showDetails = function(details){
 
 };
 var showScores = function(details) {
-    var cKeywords = ["attractive","beautiful","beauty","breakup","book","boyfriend","bride","bridesmaid","bridesmaids","clique","cliques","couple","couples","cry","dance","dancing","date","dating","diamond","diamonds","diary","diaries","divorce","divorced","divorcing","dream","dreams","dress","dresses","emotion","emotional","emotions","engaged","engagement","entangled","entanglement","entanglements","estranged","ex","exboyfriend","exboyfriends","exgirlfriend","exgirlfriends","fashion","fiance","flower","flowers","friend","friends","friendship","funeral","girl","girls","girlfriend","girlfriends","heart","hearts","intermingled","irresistible","kiss","kissing","literature","love","lovelorn","loves","loving","marriage","marry","paris","piano","pink","propose","proposal","relationship","romance","romantic","sad","saddest","secretly","sensible","sibling","single","singles","sister","sisterhood","spa","social","sweet","teen","teens","torrid","true","unfaithful","unlucky","vows","wedding","weddings","wife"];
+    var cKeywords = ["attractive","beautiful","beauty","breakup","book","boyfriend","bride","bridesmaid","bridesmaids","child","children","clique","cliques","couple","couples","cry","dance","dancing","date","dating","diamond","diamonds","diary","diaries","divorce","divorced","divorcing","dream","dreams","dress","dresses","emotion","emotional","emotions","engaged","engagement","entangled","entanglement","entanglements","estranged","ex","exboyfriend","exboyfriends","exgirlfriend","exgirlfriends","fashion","fiance","flower","flowers","friend","friends","friendship","funeral","girl","girls","girlfriend","girlfriends","heart","hearts","housewife","intermingled","irresistible","kiss","kissing","literature","love","lovelorn","loves","loving","marriage","marry","paris","piano","pink","propose","proposal","relationship","romance","romantic","sad","saddest","secretly","sensible","sibling","single","singles","sister","sisterhood","spa","social","sweet","teen","teens","torrid","true","unfaithful","unlucky","vows","wedding","weddings","wife"];
     var gKeywords = ["alien","anarchy","apocalypse","apocalyptic","armor","army","assassin","assassinate","assassinated","athelete","atheletes","avenge","avengers","battle","baseball","batman","blood","bloody","bounty","boxer","boxing","brutal","brutality","cia","coach","coaching","corrupt","corruption","cop","cowboy","crime","crimes","criminal","cyborg","cyborgs","dead","death","dictator","die","disaster","dead","deadly","destroy","destroyed","destroys","destructive","dragon","dragons","drug","drugfueled","drugs","espionage","fbi","fight","fighter","fighting","football","galaxy","gang","gangster","gangsters","gladiator","gladiators","golf","gun","guns","hockey","hostage","hostages","hunt","hunting","invade","invasion","jail","kill","killer","killing","kingpin","knight","knights","lethal","maniac","marines","martial","maverick","menace","menacing","merc","mercenary","military","mob","mobster","murder","murdered","murdering","navy","outlaw","outlaws","pals","pentagon","platoon","police","power","powerful","powerhungry","prison","prisoners","psychopath","revenge","robbery","sadistic","samurai","security","serial","shield","slaughter","soldier","soldiers","space","spiderman","superhero","superheroes","sword","syndicate","terror","terrorist","terrorists","thug","thugs","undercover","victim","vietnam","vikings","villain","villainous","violence","violent","war","warrior","warriors","world","xmen","zombie","zombies"];
     var cScore = (countMatches(cKeywords,details['title']) * 12) + (countMatches(cKeywords,details['overview']) * 6);
     var gScore = (countMatches(gKeywords,details['title']) * 12) + (countMatches(gKeywords,details['overview']) * 6);
@@ -173,17 +161,11 @@ var showScores = function(details) {
     } else {
         $('#result-winner').html('<i class="fa fa-check"></i> Tied');
     }
-
     $('#cScore').text(cScore+"%");
     $('#gScore').text(gScore+"%");
-
     console.log("C Keywords ... " + cKeywords.length);
     console.log("G Keywords ... " + gKeywords.length);
-
-
-
 };
-
 var countMatches = function(keywords,text){
     var count = 0;
     for(var i=0;i<keywords.length;i++) {
@@ -195,31 +177,3 @@ var countMatches = function(keywords,text){
     }
     return count;
 };
-
-
-
-
-// testing stuff
-
-var getScore = function(text) {
-
-    var score = 1;
-    return score;
-}
-
-
-
-var testR = function(details){
-    var stuff = $("<h3>" + details['title'] + " (" + details['year'] + ")</h3><div><img src='" + details['poster'] + "'></div>")
-    $("#center-display-btn").fadeOut(200, function(){
-        $('#center-display-results').append(stuff);
-        $('#center-display-results').fadeIn(200);
-    });
-    console.log(details['title']);
-    console.log(details['year']);
-    // console.log(details['overview']);
-    if (details['overview'].length < 20) {
-        console.log("INSUFFICIENT DATA")
-    }
-};
-
