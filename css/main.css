@@ -219,11 +219,32 @@ section {
     text-align: left;
     float: right;
 }
-#result-winner {
-    font: 800 2.4rem/2.6rem "Open Sans", sans-serif;    
-}
 #result-scores {
+    font: 800 2.8rem/3rem "Open Sans", sans-serif;
     color: #b60912;
+    margin: auto;
+    padding: 20px;
+    width: 300px;
+}
+#result-winner {
+    padding: 0.8rem 0; 
+}
+#result-scores > div:nth-child(2) {
+    width: 46%;
+    float: left;
+    border: 2px solid #333;
+    padding: 1rem 0;
+}
+#result-scores > div:nth-child(3) {
+    width: 46%;
+    float: right;
+    border: 2px solid #333;
+    padding: 1rem 0;
+}
+.score-title {
+    font-size: 1.4rem;
+    line-height: 1.6rem;
+    color: #333;
 }
 #results button {
     background-color: #b60912;
@@ -249,6 +270,20 @@ section {
         font: 400 1rem/1.2rem "Open Sans", sans-serif;
         float: none;
     }
+    #result-scores {
+        font-size: 2rem;
+        line-height: 2.2rem;
+        width: 220px;
+    }
+    #result-scores > div:nth-child(2) {
+        border: 1px solid #333;
+        padding: 0.6rem 0;
+    }
+    #result-scores > div:nth-child(3) {
+        border: 1px solid #333;
+        padding: 0.6rem 0;
+    }
+
 }
 
 /* OTHER */
@@ -310,7 +345,6 @@ section {
         width: 86%;
     }
 }
-
 
 /* FOOTER */
 

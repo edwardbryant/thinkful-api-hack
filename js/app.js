@@ -90,7 +90,6 @@ var getMovieIdRandom = function() {
     })
     .done(function(result){
         var id = result['results'][item]['id']; 
-        $('#test').text(test);
         console.log("API movie search randomly selected ID " + id)
         getMovieDetails(id);
     });
@@ -158,7 +157,7 @@ var showDetails = function(details){
 };
 var showScores = function(details) {
     var cKeywords = ["attractive","beautiful","beauty","breakup","book","boyfriend","bride","bridesmaid","bridesmaids","clique","cliques","couple","couples","cry","dance","dancing","date","dating","diamond","diamonds","diary","diaries","divorce","divorced","divorcing","dream","dreams","dress","dresses","emotion","emotional","emotions","engaged","engagement","entangled","entanglement","entanglements","estranged","ex","exboyfriend","exboyfriends","exgirlfriend","exgirlfriends","fashion","fiance","flower","flowers","friend","friends","friendship","funeral","girl","girls","girlfriend","girlfriends","heart","hearts","intermingled","irresistible","kiss","kissing","literature","love","lovelorn","loves","loving","marriage","marry","paris","piano","pink","propose","proposal","relationship","romance","romantic","sad","saddest","secretly","sensible","sibling","single","singles","sister","sisterhood","spa","social","sweet","teen","teens","torrid","true","unfaithful","unlucky","vows","wedding","weddings","wife"];
-    var gKeywords = ["alien","anarchy","apocalypse","apocalyptic","armor","army","assassin","assassinate","assassinated","athelete","atheletes","avenge","avengers","battle","baseball","batman","blood","bloody","bounty","boxer","boxing","brutal","brutality","coach","coaching","corrupt","corruption","cop","cowboy","crime","crimes","criminal","cyborg","cyborgs","dead","death","dictator","die","disaster","destroy","destroyed","destroys","destructive","dragon","dragons","drug","drugfueled","drugs","espionage","fbi","fight","fighter","fighting","football","galaxy","gang","gangster","gangsters","gladiator","gladiators","golf","gun","guns","hockey","hostage","hostages","hunt","hunting","invade","invasion","jail","kill","killer","killing","kingpin","knight","knights","lethal","maniac","marines","martial","maverick","menace","menacing","merc","mercenary","military","mob","mobster","murder","murdered","murdering","navy","outlaw","outlaws","pals","pentagon","platoon","police","power","prison","prisoners","psychopath","revenge","robbery","sadistic","samurai","security","serial","shield","slaughter","soldier","soldiers","space","spiderman","superhero","superheroes","sword","syndicate","terror","terrorist","terrorists","thug","thugs","undercover","victim","vietnam","vikings","villain","villainous","violence","violent","war","warrior","warriors","world","xmen","zombie","zombies"];
+    var gKeywords = ["alien","anarchy","apocalypse","apocalyptic","armor","army","assassin","assassinate","assassinated","athelete","atheletes","avenge","avengers","battle","baseball","batman","blood","bloody","bounty","boxer","boxing","brutal","brutality","cia","coach","coaching","corrupt","corruption","cop","cowboy","crime","crimes","criminal","cyborg","cyborgs","dead","death","dictator","die","disaster","dead","deadly","destroy","destroyed","destroys","destructive","dragon","dragons","drug","drugfueled","drugs","espionage","fbi","fight","fighter","fighting","football","galaxy","gang","gangster","gangsters","gladiator","gladiators","golf","gun","guns","hockey","hostage","hostages","hunt","hunting","invade","invasion","jail","kill","killer","killing","kingpin","knight","knights","lethal","maniac","marines","martial","maverick","menace","menacing","merc","mercenary","military","mob","mobster","murder","murdered","murdering","navy","outlaw","outlaws","pals","pentagon","platoon","police","power","powerful","powerhungry","prison","prisoners","psychopath","revenge","robbery","sadistic","samurai","security","serial","shield","slaughter","soldier","soldiers","space","spiderman","superhero","superheroes","sword","syndicate","terror","terrorist","terrorists","thug","thugs","undercover","victim","vietnam","vikings","villain","villainous","violence","violent","war","warrior","warriors","world","xmen","zombie","zombies"];
     var cScore = (countMatches(cKeywords,details['title']) * 12) + (countMatches(cKeywords,details['overview']) * 6);
     var gScore = (countMatches(gKeywords,details['title']) * 12) + (countMatches(gKeywords,details['overview']) * 6);
     if (cScore > 100) {
@@ -168,9 +167,11 @@ var showScores = function(details) {
         gScore = 100;
     }
     if (cScore > gScore) {
-        $('#winner').html('<i class="fa fa-check"></i> Chick Flic');
+        $('#result-winner').html('<i class="fa fa-check"></i> Chick Flic');
+    } else if (gScore > cScore) {
+        $('#result-winner').html('<i class="fa fa-check"></i> Guy Movie');
     } else {
-        $('#winner').html('<i class="fa fa-check"></i> Guy Movie');
+        $('#result-winner').html('<i class="fa fa-check"></i> Tied');
     }
 
     $('#cScore').text(cScore+"%");
