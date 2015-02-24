@@ -42,11 +42,8 @@ body {
     padding: 0;
     text-align: center;
 }
-.left {
-    float: left;
-}
-.right {
-    float: right;
+.clear {
+    clear: both;
 }
 hr {
     border: 0;
@@ -168,10 +165,8 @@ section {
     border-radius: none;
     padding: 14px;
     vertical-align: middle;
-
     border: solid 2px #b60912;
     box-shadow: inset 1px 1px 2px 0 #707070;
-
 }
 #search input:focus {
     outline: none;
@@ -188,10 +183,17 @@ section {
     cursor: pointer;
     vertical-align: middle;
 }
+@media (max-width: 600px) {
+    #search input {
+        width: 70%;
+    }
+}
 
 /* RESULTS SCREEN */
 
 #results {
+    width: 520px;
+    margin: auto;
     display: none;
 }
 #result-title {
@@ -206,8 +208,47 @@ section {
 #result-poster img {
     width: 150px;
     height: 250px;
-    border: 2px solid #b60912;
+    border: 2px solid #eee;
     box-shadow: 8px 8px 4px #707070;
+    float: left;
+}
+#result-overview {
+    font: 400 1.2rem/1.4rem "Open Sans", sans-serif;
+    width: 300px;
+    margin: 18px auto;
+    text-align: left;
+    float: right;
+}
+#result-winner {
+    font: 800 2.4rem/2.6rem "Open Sans", sans-serif;    
+}
+#result-scores {
+    color: #b60912;
+}
+#results button {
+    background-color: #b60912;
+    padding: 12px;
+    border: 2px solid #000;
+    color: #fff;
+    font-size: 1.8rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 1px #000;
+    cursor: pointer;
+    vertical-align: middle;
+    clear: both;
+}
+@media (max-width: 600px) {
+    #results {
+        width: 100%;
+    }
+    #result-poster img {
+        float: none;
+    }
+    #result-overview {
+        font: 400 1rem/1.2rem "Open Sans", sans-serif;
+        float: none;
+    }
 }
 
 /* OTHER */
@@ -218,6 +259,12 @@ section {
     text-transform: uppercase;
     text-align: center;
     padding: 12px 8px 12px 8px;
+}
+.live {
+    float: left;
+}
+.date {
+    float: right;
 }
 .sm-box span {
     font: 800 1.6rem/1.6rem "Open Sans", sans-serif;
@@ -245,13 +292,25 @@ section {
     text-align: center;
     letter-spacing: 1.4rem;
 }
-.coming-soon h3 {
+.how {
+    font: 400 1.2rem/1.4rem "Open Sans", sans-serif;
+    margin: 1rem 10rem;
+    color: #333;
+}
+.how h3 {
     font: 800 2rem/2rem "Open Sans", sans-serif;
-    letter-spacing: 1.6rem;
+    letter-spacing: 1.2rem;
     padding-left: 1.6rem;
     margin: 1rem;
-
 }
+@media (max-width: 600px) {
+    .live, .date, .how {
+        float: none;
+        margin: 8px auto;
+        width: 86%;
+    }
+}
+
 
 /* FOOTER */
 

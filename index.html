@@ -48,7 +48,7 @@
                 </div>
 
                 <div id="search">
-                    <input type="text" name="query" id="query" value="" placeholder="movie title"> <button id="btnSearch"> <i class="fa fa-search"></i> </button>
+                    <input type="text" name="query" id="query" value="" placeholder="enter title"> <button id="btnSearch"> <i class="fa fa-search"></i> </button>
                     <div>&mdash; or &mdash;</div>
                     <button id="btnRandom"><i class="fa fa-random"></i> &nbsp; Select Random Movie </button>
                 </div>
@@ -56,43 +56,36 @@
                 <div id="results">
                     <h2><span id="result-title">Movie Title</span></h2>
                     <h2>(<span id="result-year"></span>)</h2>
-                    <div id="result-poster"><img src="http://placehold.it/150x250&text=poster"></div>        
+                    <div id="result-poster"><img src="http://placehold.it/10x10"></div>
+                    <div id="result-overview">[overview text]</div>
+                    <div class="result-scores clear">
+                        <div id="result-winner"></div>
+                        <span id="cScore">0</span>
+                        <span id="gScore">0</span>
+                    </div>
+                    <div><button id="btnReset"><i class="fa fa-arrow-left"></i> &nbsp; Try Another Movie </button></div>
                 </div>
-
-                <!-- <span id="left-display"><img id="chick-img" src="img/chick.png"></span>
-                <span id="center-display-btn"><img id="ticket" src="img/movie-ticket-sm.png"></span>
-                <span id="center-display-results">
-                        <img>
-
-                </span>
-                <span id="right-display"><img id="guy-img" src="img/guy.png"></span> -->
-
-                <br><br>
             </div>    
         </section>
-        <section class="inverse">
-            <div class="content-wide">
-                <div><br><span id="test">[section]</span><br><br></div>
-            </div>    
-        </section>
+        <br>
         <section>
             <div class="content-wide">
                 <hr>
-                <div class="sm-box inverse left">
+                <div class="live sm-box inverse">
                     <span id="live">LIVE</span>
                     <span>one</span>
                     <span>night</span>
                     <span>only</span>
                     <span> <i class="fa fa-bookmark"></i></span>
                 </div>
-                <div class="sm-box inverse right">
+                <div class="date sm-box inverse">
                     <span id="day">&bull;Xxx&bull;</span>
                     <span id="month">Xxx</span>
                     <span id="date">xx</span>
                 </div>
-                <div class="coming-soon">
-                    <h3>Coming Soon</h3>
-                    <div class="red"> <i class="fa fa-female"></i> More Action-Packed Matchups <i class="fa fa-male"></i> </div>
+                <div class="how">
+                    <h3>How it Works</h3>
+                    <div> Chick Flick or Guy Movie uses HTML, CSS, JS &amp; jQuery combined with the power of sexist clichés to guess at whether a movie was targeted at a female or male audience. Specifically, it combs through the title and description of the movie to find certain keywords (<em>e.g.</em>, "romantic" or "war").</div>
                     <div></div>
                 </div>
                 <hr>
@@ -100,9 +93,8 @@
         </section>
     </main>
     <footer class="inverse">
-            <div class="left">Made in the USA &bull; Built with HTML, CSS, JS, &amp; jQuery<br>Copyright &copy; 2015, Edward Bryant</div>
-            <div class="right">Legal Disclaimer &bull; Chick Flic or Guy Movie takes no reposibility for any actual or perceived loss in femininity or manliness.</div>
-            <hr>
+            <div>Made in the USA &bull; Copyright &copy; 2015, Edward Bryant</div>
+            <div>Legal Disclaimer &bull; Chick Flic or Guy Movie takes no reposibility for any actual or perceived loss in femininity or manliness.</div>
     </footer>
 </div>    
 <script src="http://code.jquery.com/jquery.min.js"></script>

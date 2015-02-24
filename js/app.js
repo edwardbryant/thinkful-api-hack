@@ -11,7 +11,6 @@ $(document).ready(function() {
     })
 
     $('#btnSearch').on('click', function() {
-        console.log("query option selected");     
         var q = $('#query').val()
         getMovieId(q);
         $('#search').fadeOut(600, function(){
@@ -20,10 +19,16 @@ $(document).ready(function() {
     })
 
     $('#btnRandom').on('click', function() {
-        console.log("random option selected");     
         getMovieIdRandom();
         $('#search').fadeOut(600, function(){
             $('#results').fadeIn(600);
+        });
+    })
+
+    $('#btnReset').on('click', function() {
+        $('#query').val("");
+        $('#results').fadeOut(600, function(){
+            $('#search').fadeIn(600);
         });
     })
 
@@ -84,7 +89,6 @@ var getMovieIdRandom = function() {
         type: "GET"
     })
     .done(function(result){
-        console.log(result);
         var id = result['results'][item]['id']; 
         $('#test').text(test);
         console.log("API movie search randomly selected ID " + id)
@@ -105,7 +109,6 @@ var getMovieId = function(q) {
         type: "GET",
     })
     .done(function(result){
-        console.log(result);
         var id = result['results'][0]['id'];
         console.log("API movie search matched (" + q + ") to ID " + id)
         getMovieDetails(id);
@@ -124,46 +127,80 @@ var getMovieDetails = function(id){
         type: "GET",
     })
     .done(function(result){
+        console.log(result);
         var displayDetails = {
             title: result['title'],
             year: result['release_date'].substr(0,4),
-            poster: "http://image.tmdb.org/t/p/w150/" + result['poster_path']
+            poster: "http://image.tmdb.org/t/p/w150/" + result['poster_path'],
+            overview: result['overview']
         };        
         var textDetails = {
-            title: result['title'],
+            title: cleanText(result['title']),
             tagline: cleanText(result['tagline']),
-            overview_raw: result['overview'],
             overview: cleanText(result['overview'])
         };
-        showDetails(displayDetails);
 
-        // scoreResults()
-        // testR(displayDetails);
+
+        // if insufficient info    
+
+        showDetails(displayDetails);
+        showScores(textDetails);
 
 
     });
 };
 var showDetails = function(details){
-    console.log("showing movie details");
-    $('#result-poster > img').attr("src", details['poster']);
     $('#result-title').text(details['title']);
     $('#result-year').text(details['year']);
+    $('#result-poster > img').attr("src", details['poster']);
+    $('#result-overview').text(details['overview']);
+
 };
+var showScores = function(details) {
+    var cKeywords = ["attractive","beautiful","beauty","breakup","book","boyfriend","bride","bridesmaid","bridesmaids","clique","cliques","couple","couples","cry","dance","dancing","date","dating","diamond","diamonds","diary","diaries","divorce","divorced","divorcing","dream","dreams","dress","dresses","emotion","emotional","emotions","engaged","engagement","entangled","entanglement","entanglements","estranged","ex","exboyfriend","exboyfriends","exgirlfriend","exgirlfriends","fashion","fiance","flower","flowers","friend","friends","friendship","funeral","girl","girls","girlfriend","girlfriends","heart","hearts","intermingled","irresistible","kiss","kissing","literature","love","lovelorn","loves","loving","marriage","marry","paris","piano","pink","propose","proposal","relationship","romance","romantic","sad","saddest","secretly","sensible","sibling","single","singles","sister","sisterhood","spa","social","sweet","teen","teens","torrid","true","unfaithful","unlucky","vows","wedding","weddings","wife"];
+    var gKeywords = ["alien","anarchy","apocalypse","apocalyptic","armor","army","assassin","assassinate","assassinated","athelete","atheletes","avenge","avengers","battle","baseball","batman","blood","bloody","bounty","boxer","boxing","brutal","brutality","coach","coaching","corrupt","corruption","cop","cowboy","crime","crimes","criminal","cyborg","cyborgs","dead","death","dictator","die","disaster","destroy","destroyed","destroys","destructive","dragon","dragons","drug","drugfueled","drugs","espionage","fbi","fight","fighter","fighting","football","galaxy","gang","gangster","gangsters","gladiator","gladiators","golf","gun","guns","hockey","hostage","hostages","hunt","hunting","invade","invasion","jail","kill","killer","killing","kingpin","knight","knights","lethal","maniac","marines","martial","maverick","menace","menacing","merc","mercenary","military","mob","mobster","murder","murdered","murdering","navy","outlaw","outlaws","pals","pentagon","platoon","police","power","prison","prisoners","psychopath","revenge","robbery","sadistic","samurai","security","serial","shield","slaughter","soldier","soldiers","space","spiderman","superhero","superheroes","sword","syndicate","terror","terrorist","terrorists","thug","thugs","undercover","victim","vietnam","vikings","villain","villainous","violence","violent","war","warrior","warriors","world","xmen","zombie","zombies"];
+    var cScore = (countMatches(cKeywords,details['title']) * 12) + (countMatches(cKeywords,details['overview']) * 6);
+    var gScore = (countMatches(gKeywords,details['title']) * 12) + (countMatches(gKeywords,details['overview']) * 6);
+    if (cScore > 100) {
+        cScore = 100;
+    }
+    if (gScore > 100) {
+        gScore = 100;
+    }
+    if (cScore > gScore) {
+        $('#winner').html('<i class="fa fa-check"></i> Chick Flic');
+    } else {
+        $('#winner').html('<i class="fa fa-check"></i> Guy Movie');
+    }
+
+    $('#cScore').text(cScore+"%");
+    $('#gScore').text(gScore+"%");
+
+    console.log("C Keywords ... " + cKeywords.length);
+    console.log("G Keywords ... " + gKeywords.length);
+
+
+
+};
+
+var countMatches = function(keywords,text){
+    var count = 0;
+    for(var i=0;i<keywords.length;i++) {
+        var pattern = new RegExp("\\b"+keywords[i]+"\\b","g");
+        var m = text.match(pattern);
+        if (m != null) {
+            count = count + m.length;
+        }
+    }
+    return count;
+};
+
+
 
 
 // testing stuff
 
-
-
 var getScore = function(text) {
-
-
-    var cKeywords = ["attractive","beautiful","beauty","breakup","boyfriend","bride","bridesmaid","bridesmaids","clique","cliques","couple","couples","cry","dance","dancing","date","dating","diamond","diamonds","diary","diaries","divorce","divorced","dream","dreams","dress","dresses","emotion","emotional","emotions","estranged","ex","exboyfriend","exboyfriends","exgirlfriend","exgirlfriends","fashion","friend","friends","girl","girls","girlfriend","girlfriends","heart","hearts","intermingled","irresistible","kiss","kissing","love","loving","marriage","marry","paris","piano","pink","relationship","romance","romantic","sad","saddest","sensible","single","singles","sister","sisterhood","spa","social","sweet","teen","teens","unfaithful","unlucky","vows","wedding","weddings"];
-
-    var gKeywords = ["alien","apocalypse","apocalyptic","armor","army","athelete","atheletes","battle","baseball","blood","bloody","boxer","boxing","coach","coaching","corrupt","corruption","cop","cowboy","crime","crimes","criminal","cyborg","cyborgs","dead","death","die","disaster","destroy","destroys","destructive","dragon","dragons","drug","drugs","fbi","fight","fighter","fighting","football","gang","gangster","gangsters","gladiator","gladiators","golf","gun","guns","hockey","hostage","hostages","hunt","hunting","invade","invasion","jail","kill","killer","killing","maniac","marines","martial","maverick","military","mob","mobster","murder","navy","outlaw","outlaws","pentagon","platoon","police","prison","prisoners","psychopath","revenge","robbery","samurai","security","serial","shield","slaughter","soldier","soldiers","superhero","sword","syndicate","terror","terrorist","terrorists","victim","vikings","vietnam","violence","violent","war","warrior","warriors","world","zombie","zombies"];
-
-    console.log("C Keywords ... " + cKeywords.length);
-    console.log("G Keywords ... " + gKeywords.length);
 
     var score = 1;
     return score;
